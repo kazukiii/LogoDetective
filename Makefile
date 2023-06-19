@@ -33,4 +33,8 @@ lint:
 	@make lint-frontend
 	@make lint-backend
 
+create-env:
+	cd frontend && cp .env.local.example .env.local
+	cd backend && cp .env.example .env
+
 .PHONY: build up down logs ps

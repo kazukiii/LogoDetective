@@ -23,10 +23,23 @@ You will instantly know the name of the logo you wanted to know!
 Make sure you have [Docker Desktop](https://docs.docker.com/desktop/)
 and [Supabase CLI](https://supabase.com/docs/guides/cli) installed.
 
-Just run the following command at the root of your project:
+Run the following command to create `.env` files:
+```sh
+make create-env
+```
+
+Set the environment variables in the `.env` files.
+
+And run the following command at the root of your project:
 
 ```sh
 make up
+```
+
+You can view all logs with the following command:
+
+```sh
+make logs
 ```
 
 ## Contributing
