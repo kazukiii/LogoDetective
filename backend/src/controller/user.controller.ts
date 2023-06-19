@@ -9,7 +9,7 @@ export class UserController {
       const token = await SignUpUseCase.execute(name, email, password)
 
       res.status(201).json({
-        message: 'UserEntity registered successfully',
+        message: 'User registered successfully',
         token,
       })
     } catch (error: unknown) {
@@ -27,7 +27,7 @@ export class UserController {
       const token = await LogInUseCase.execute(email, password)
 
       res.status(200).json({
-        message: 'UserEntity logged in successfully',
+        message: 'User logged in successfully',
         token,
       })
     } catch (error: unknown) {

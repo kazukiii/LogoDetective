@@ -1,5 +1,5 @@
 build:
-	docker compose build
+	docker compose build --no-cache --force-rm
 
 up:
 	supabase start && docker compose up -d

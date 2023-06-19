@@ -6,7 +6,7 @@ export class LogInUseCase {
     const user = await UserRepository.findOneBy({ email })
 
     if (!user) {
-      throw new Error('UserEntity not found.')
+      throw new Error('User not found.')
     }
 
     const isValidPassword = await bcrypt.compare(password, user.passwordHash)

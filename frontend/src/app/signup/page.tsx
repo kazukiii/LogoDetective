@@ -1,6 +1,43 @@
-import React from 'react'
+'use client'
+
+import React, { FormEvent, useState } from 'react'
+import axios, { AxiosError } from 'axios'
+import axiosInstance from '../../../services/axiosInstance'
+import { useRouter } from 'next/navigation'
+
+interface ErrorResponse {
+  message: string
+}
 
 export default function Signup() {
+  const router = useRouter()
+  const [name, setName] = useState<string>('')
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+  const [error, setError] = useState<string | null>(null)
+
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault()
+    setError(null)
+
+    try {
+      const response = await axiosInstance.post('/user/signup', {
+        name,
+        email,
+        password,
+      })
+
+      await router.push('/login')
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        const serverError = error as AxiosError<ErrorResponse>
+        if (serverError && serverError.response) {
+          setError(serverError.response.data.message)
+        }
+      }
+    }
+  }
+
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -12,7 +49,8 @@ export default function Signup() {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Sign up for a new account
             </h1>
-            <form className="space-y-4 md:space-y-6" action="#">
+            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+              {error && <div className="p-2 mb-4 text-sm text-white bg-red-500 rounded">{error}</div>}
               <div>
                 <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                   Your name
@@ -23,6 +61,7 @@ export default function Signup() {
                   id="name"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Your Name"
+                  onChange={event => setName(event.target.value)}
                 />
               </div>
               <div>
@@ -35,6 +74,7 @@ export default function Signup() {
                   id="email"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="name@company.com"
+                  onChange={event => setEmail(event.target.value)}
                 />
               </div>
               <div>
@@ -47,24 +87,8 @@ export default function Signup() {
                   id="password"
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  onChange={event => setPassword(event.target.value)}
                 />
-              </div>
-              <div className="flex items-center justify-between">
-                <div className="flex items-start">
-                  <div className="flex items-center h-5">
-                    <input
-                      id="remember"
-                      aria-describedby="remember"
-                      type="checkbox"
-                      className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-                    />
-                  </div>
-                  <div className="ml-3 text-sm">
-                    <label htmlFor="remember" className="text-gray-500 dark:text-gray-300">
-                      Remember me
-                    </label>
-                  </div>
-                </div>
               </div>
               <button
                 type="submit"
