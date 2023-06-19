@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import userRouter from './routes/UserRoutes'
+import LogoRouter from './routes/LogoRoutes'
 import { myDataSource } from './app-data-source'
 import 'reflect-metadata'
 
@@ -21,6 +22,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cors())
 
 app.use('/user', userRouter)
+app.use('/logo', LogoRouter)
 
 app.get('/', (req, res) => {
   res.send('Hello, World!')

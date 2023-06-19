@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from 'typeorm'
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryColumn, UpdateDateColumn } from 'typeorm'
 import { ulid } from 'ulid'
+import { UploadedImage } from './uploadedImage.entity'
 
 @Entity('users')
 export class User {
@@ -23,4 +24,7 @@ export class User {
 
   @DeleteDateColumn({ type: 'timestamp', name: 'deleted_at' })
   deletedAt: Date
+
+  @OneToMany(() => UploadedImage, uploadedImage => uploadedImage.user)
+  uploadedImages: UploadedImage[]
 }
