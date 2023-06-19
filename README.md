@@ -12,6 +12,9 @@
 - [License](#license)
 
 ## Description
+With this web application, you can upload an image of a logo and get its name.
+
+You will instantly know the name of the logo you wanted to know!
 
 ## ✨ Demo
 
