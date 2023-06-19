@@ -1,12 +1,12 @@
-![Forks](https://img.shields.io/badge/forks-44-blue)
-![Stars](https://img.shields.io/badge/stars-13-yellow)
+![Forks](https://img.shields.io/github/forks/kazukiii/LogoDetective)
+![Stars](https://img.shields.io/github/stars/kazukiii/LogoDetective?color=yellow)
 
 # Welcome to LogoDetective 🕵
 
 ## Table of Contents
 
 - [Description](#description)
-- [✨ Demo](#-demo)
+- [✨ Preview](#-preview)
 - [🚀 Usage](#-usage)
 - [Contributing](#contributing)
 - [License](#license)

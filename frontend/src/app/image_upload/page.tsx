@@ -2,7 +2,7 @@
 
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import { AxiosResponse } from 'axios'
-import axiosInstance from '../../../services/axiosInstance'
+import axiosInstance from '@/services/axiosInstance'
 import Image from 'next/image'
 
 interface Annotation {
@@ -77,7 +77,9 @@ export default function ImageUpload() {
         {response && (
           <div className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
             <div>This logo is ↓</div>
-            <div className="text-2xl">{response.annotations[0].description}</div>
+            <div className="text-2xl">
+              {response.annotations[0] ? response.annotations[0].description : 'Cannot detect'}
+            </div>
           </div>
         )}
         <button

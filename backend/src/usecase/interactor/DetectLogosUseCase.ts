@@ -3,10 +3,10 @@ import { DetectLogos } from '../../infrastructure/google/DetectLogos'
 import { UploadedImage } from '../../domain/entity/uploadedImage.entity'
 import { LogoDetection } from '../../domain/entity/logoDetection.entity'
 import { UploadedImageRepository } from '../repository/uploadedImage.repository'
-import { LogoDetectionRepository } from '../repository/logoDetection.entity'
+import { LogoDetectionRepository } from '../repository/logoDetection.repository'
 import { UserRepository } from '../repository/user.repository'
 
-export class DetectLogsUseCase {
+export class DetectLogosUseCase {
   private readonly detectLogs: IDetectLogos
 
   constructor(fileName: string) {

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { DetectLogsUseCase } from '../usecase/interactor/DetectLogsUseCase'
+import { DetectLogosUseCase } from '../usecase/interactor/DetectLogosUseCase'
 
 export class LogoController {
   static async detectLogos(req: Request, res: Response) {
@@ -9,7 +9,7 @@ export class LogoController {
       const fileName = file?.originalname || ''
       const filePath = file?.path || ''
 
-      const detectLogsUseCase = new DetectLogsUseCase(filePath)
+      const detectLogsUseCase = new DetectLogosUseCase(filePath)
       const annotations = await detectLogsUseCase.execute(userId, fileName, filePath)
 
       res.status(200).json({ annotations })

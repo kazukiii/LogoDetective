@@ -2,17 +2,20 @@
 
 import React, { FormEvent, useState } from 'react'
 import { AxiosError } from 'axios'
-import axiosInstance from '../../../services/axiosInstance'
+import axiosInstance from '@/services/axiosInstance'
+import { useRouter } from 'next/navigation'
 
 interface ErrorResponse {
   message: string
 }
 
 export default function Login() {
+  const router = useRouter()
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [error, setError] = useState<string | null>(null)
-  const [remember, setRemember] = useState(false)
+  const [remember, setRemember] = useState<boolean>(false)
+
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
     setError(null)
@@ -27,7 +30,7 @@ export default function Login() {
         localStorage.setItem('token', response.data.token)
       }
 
-      console.log(response.data)
+      router.push('/image_upload')
     } catch (error) {
       const serverError = error as AxiosError<ErrorResponse>
       if (serverError.response) {
